@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongoose').Types;
 const { User, Reaction } = require('../models');
 
 module.exports = {
@@ -9,7 +8,6 @@ module.exports = {
 
       const userObj = {
         users,
-        headCount: await headCount(),
       };
 
       res.json(userObj);
