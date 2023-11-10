@@ -38,7 +38,7 @@ module.exports = {
   async addReaction(req, res) {
     try {
       const reaction = await Thought.findOneAndUpdate({ _id: req.params.thoughtId },
-        { $addedToSet: { reactions: req.body } },
+        { $addToSet: { reactions: req.body } },
         { runValidators: true, new: true });
         res.json(reaction)
 } catch (err) {

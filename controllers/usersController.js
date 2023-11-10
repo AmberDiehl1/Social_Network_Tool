@@ -66,19 +66,18 @@ module.exports = {
   },
 
   // Add an reaction to a user
-  async addReaction(req, res) {
-
+  async addFriend(req, res) {
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
-        { $addToSet: { reactions: req.body } },
+        { $addToSet: { friends: req.params.friendId } },
         { runValidators: true, new: true }
       );
 
       if (!user) {
         return res
           .status(404)
-          .json({ message: 'No user found with that ID :(' });
+          .json({ message: 'No friend found with that ID :(' });
       }
 
       res.json(user);
@@ -86,18 +85,18 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Remove reaction from a user
-  async removeReaction(req, res) {
+  // Remove friend from a user
+  async removeFriend(req, res) {
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
-        { $pull: { reaction: { reactionId: req.params.reactionId } } },
+        { $pull: { friends: req.params.friendId } },
         { runValidators: true, new: true });
 
       if (!user) {
         return res
           .status(404)
-          .json({ message: 'No user found with that ID :(' });
+          .json({ message: 'No friend found with that ID :(' });
       }
 
       res.json(user);
