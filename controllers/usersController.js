@@ -6,11 +6,7 @@ module.exports = {
     try {
       const users = await User.find();
 
-      const userObj = {
-        users,
-      };
-
-      res.json(userObj);
+      res.json(users);
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
@@ -26,10 +22,7 @@ module.exports = {
         return res.status(404).json({ message: 'No user with that ID' })
       }
 
-      res.json({
-        user,
-        grade: await grade(req.params.userId),
-      });
+      res.json(user);
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
